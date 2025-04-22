@@ -4,12 +4,12 @@ import { FaHome, FaChartLine, FaGlobe, FaUserAlt } from 'react-icons/fa';
 
 const navLinks = [
   { to: '/', label: 'Home', icon: <FaHome />, exact: true },
-  { to: '/trending-songs', label: 'Trending Songs', icon: <FaChartLine /> },
-  { to: '/trending-albums', label: 'Trending Albums', icon: <FaChartLine /> },
-  { to: '/trending-shows', label: 'Trending Shows', icon: <FaChartLine /> },
-  { to: '/top-songs', label: 'Top Songs', icon: <FaChartLine /> },
-  { to: '/top-albums', label: 'Top Albums', icon: <FaChartLine /> },
-  { to: '/top-artists', label: 'Top Artists', icon: <FaGlobe /> },
+  { to: '/trending-songs', label: 'Trending Songs' },
+  { to: '/trending-albums', label: 'Trending Albums' },
+  { to: '/trending-shows', label: 'Trending Shows' },
+  { to: '/top-songs', label: 'Top Songs'},
+  { to: '/top-albums', label: 'Top Albums' },
+  { to: '/top-artists', label: 'Top Artists' },
   { to: '/profile', label: 'Profile', icon: <FaUserAlt /> },
 ];
 
@@ -60,7 +60,6 @@ const Sidebar = () => {
                   }`
                 }
               >
-                <FaHome className="text-lg" />
                 <span className="text-sm">Home</span>
               </NavLink>
             </li>
@@ -75,7 +74,6 @@ const Sidebar = () => {
                   }`
                 }
               >
-                <FaChartLine className="text-lg" />
                 <span className="text-sm">Trending Songs</span>
               </NavLink>
             </li>
@@ -90,7 +88,6 @@ const Sidebar = () => {
                   }`
                 }
               >
-                <FaChartLine className="text-lg" />
                 <span className="text-sm">Trending Albums</span>
               </NavLink>
             </li>
@@ -105,7 +102,6 @@ const Sidebar = () => {
                   }`
                 }
               >
-                <FaChartLine className="text-lg" />
                 <span className="text-sm">Trending Shows</span>
               </NavLink>
             </li>
@@ -127,7 +123,6 @@ const Sidebar = () => {
                   }`
                 }
               >
-                <FaChartLine className="text-lg" />
                 <span className="text-sm">Top Songs</span>
               </NavLink>
             </li>
@@ -142,7 +137,6 @@ const Sidebar = () => {
                   }`
                 }
               >
-                <FaChartLine className="text-lg" />
                 <span className="text-sm">Top Albums</span>
               </NavLink>
             </li>
@@ -164,7 +158,6 @@ const Sidebar = () => {
                   }`
                 }
               >
-                <FaGlobe className="text-lg" />
                 <span className="text-sm">Top Artists</span>
               </NavLink>
             </li>

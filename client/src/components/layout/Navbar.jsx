@@ -37,8 +37,7 @@ const Navbar = () => {
 
         {/* Desktop Search */}
         <div className="justify-center hidden md:block w-full max-w-md">
-          {(location.pathname === '/' || location.pathname.startsWith('/search')) && <Search />}
-          {location.pathname === '/lyrics' && <LyricsSearch />}
+          {location.pathname === '/lyrics' ? <LyricsSearch /> : <Search />}
         </div>
 
         {/* Mobile Search and Hamburger */}
@@ -46,11 +45,11 @@ const Navbar = () => {
           {/* Search Icon */}
           <div className="relative h-12 flex items-center justify-center md:hidden">
             {showMobileSearch ? (
-              (location.pathname === '/' || location.pathname.startsWith('/search')) ? (
-                <Search onClose={() => setShowMobileSearch(false)} isMobile />
-              ) : location.pathname === '/lyrics' ? (
+              location.pathname === '/lyrics' ? (
                 <LyricsSearch onClose={() => setShowMobileSearch(false)} isMobile />
-              ) : null
+              ) : (
+                <Search onClose={() => setShowMobileSearch(false)} isMobile />
+              )
             ) : (
               <button
                 onClick={() => setShowMobileSearch(true)}
