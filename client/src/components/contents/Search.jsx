@@ -35,13 +35,12 @@ const Search = ({ isMobile = false, onClose }) => {
   }, [query]);
 
   return (
-    <div className={`relative w-full ${isMobile ? 'max-w-xs' : 'sm:max-w-sm md:max-w-md'
-      } transition-all duration-300`}>
+    <div className='relative w-full'>
       <input
         type="text"
-        placeholder={isMobile ? 'Find your vibe. ' : "Discover your next favorite sound..."}
+        placeholder= 'Vibes on demand — start your search'
         className={`w-full ${isMobile ? 'py-2 pl-10 pr-10 text-sm' : 'py-3 pl-12 pr-4 text-base'} 
-          text-white bg-gray-800 backdrop-blur-md rounded-full 
+          text-white bg-gray-800 backdrop-blur-md rounded-full placeholder-gray-400
           outline-none focus:ring-2 focus:ring-yellow-400 
           transition duration-300 shadow-lg`}
         value={query}

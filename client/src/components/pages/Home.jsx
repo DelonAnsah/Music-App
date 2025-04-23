@@ -6,11 +6,6 @@ import SearchSidebar from '../contents/SearchSidebar'
 import LyricsContext from '../Context/LyricsContext'
 
 
-
-
-
-
-
 const Home = () => {
 
   const { searchResults } = useContext(LyricsContext);
@@ -30,7 +25,7 @@ const Home = () => {
           </div>
         ) : (
           <div className="flex flex-col lg:flex-row h-screen gap-2">
-              <Sidebar />
+            <Sidebar />
             <main className="lg:bg-gray-800/60 mt-4 flex-1 sm:px-8 sm:py-6 overflow-y-auto rounded-2xl mb-6 shadow-xl lg:border border-gray-700 backdrop-blur-md no-scrollbar transition-all duration-300">
               <Outlet />
             </main>

@@ -18,6 +18,7 @@ import PlaylistsList from './components/sections/PlaylistsList'
 import PodcastsList from './components/sections/PodcastsList'
 import EpisodesList from './components/sections/EpisodesList'
 import TopArtists from './components/sections/TopArtists'
+import AuthPage from './components/pages/AuthPage'
 
 
 
@@ -25,6 +26,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
+      <div className="lg:pt-20">
       <Routes>
         <Route path='/' element={<Home />}>
           <Route index element={<StaticHomeContent />} />
@@ -46,7 +48,12 @@ const App = () => {
         </Route>
 
         <Route path='/lyrics' element={<Lyrics />} />
+        <Route path="/signup" element={<AuthPage  />} />
+        <Route path="/login" element={<AuthPage  />} />
+  
       </Routes>
+      </div>
+     
       <Footer />
     </div>
   )

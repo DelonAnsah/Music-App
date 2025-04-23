@@ -26,11 +26,10 @@ const LyricsSearch = ({ isMobile = false, onClose }) => {
 
 
   return (
-    <div className={`relative w-full ${isMobile ? 'max-w-xs' : 'sm:max-w-sm md:max-w-md'
-    } transition-all duration-300`}>
+    <div className='relative w-full'>
       <input
         type="text"
-        placeholder={isMobile ? 'Stuck on a lyric?' : "Heard a line? Search it."}
+        placeholder='Find the song behind your feels'
         className={`w-full ${isMobile ? 'py-2 pl-10 pr-10 text-sm' : 'py-3 pl-12 pr-4 text-base'} 
           text-white bg-gray-800 backdrop-blur-md rounded-full 
           outline-none focus:ring-2 focus:ring-yellow-400 
