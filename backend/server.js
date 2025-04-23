@@ -112,6 +112,8 @@ app.get('/api/spotify-search', ensureSpotifyToken, async (req, res) => {
 // Spotify API: Trending Songs
 app.get('/api/trending-songs', ensureSpotifyToken, async (req, res) => {
   const trackIds = [
+   '6HGL76EoYOTR2ETqucHxPA',
+   '52FemYiqssXnPyTr3ZAy3J',
    '18ohSiDMM8ZNiEDYTKvIYs',
    '0MiqXnVdcKZDBj64nlOD7c',
    '6rJXB7fIyujJK7MEfcCvrs',
