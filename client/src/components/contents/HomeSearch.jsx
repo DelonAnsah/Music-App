@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import LyricsContext from '../Context/LyricsContext'
 import { FaPlayCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import Loader from '../Loader';
 
 
@@ -27,6 +28,9 @@ const formatMinutes = (ms) => {
 const HomeSearch = () => {
 
   const { searchResults, loading } = useContext(LyricsContext);
+
+  const { setSelectedContent } = useOutletContext();
+
 
   if (loading) return <Loader />;
 
@@ -85,13 +89,9 @@ const HomeSearch = () => {
 
                 {/* Play Icon */}
                 <div className='absolute bottom-5 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                  <a
-                    href={artist.external_urls?.spotify}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <button onClick={() => setSelectedContent(`spotify:artist:${artist.id}`)}>
                     <FaPlayCircle className="text-5xl text-yellow-400" />
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -170,9 +170,9 @@ const HomeSearch = () => {
                         </div>
                         <div className='flex items-center gap-4'>
                           <p className='text-sm text-gray-400'>{formatDuration(song.duration_ms)}</p>
-                          <a href={song.external_urls?.spotify} target='_blank' rel='noopener noreferrer'>
-                            <FaPlayCircle className='text-2xl text-yellow-400 hover:scale-110 transition-transform' />
-                          </a>
+                          <button onClick={() => setSelectedContent(`spotify:track:${song.id}`)}>
+                            <FaPlayCircle className="text-2xl text-yellow-400 ml-4" />
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -219,13 +219,9 @@ const HomeSearch = () => {
 
               {/* Play Icon */}
               <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <a
-                  href={artist.external_urls?.spotify}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaPlayCircle className="text-4xl text-yellow-400 hover:scale-110 transition-transform" />
-                </a>
+                <button onClick={() => setSelectedContent(`spotify:artist:${artist.id}`)}>
+                  <FaPlayCircle className="text-5xl text-yellow-400" />
+                </button>
               </div>
             </div>
           ))}
@@ -277,9 +273,9 @@ const HomeSearch = () => {
               </div>
 
               <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <a href={album.external_urls?.spotify} target="_blank" rel="noopener noreferrer">
-                  <FaPlayCircle className="text-4xl text-yellow-400 hover:scale-110 transition-transform" />
-                </a>
+                <button onClick={() => setSelectedContent(`spotify:album:${album.id}`)}>
+                  <FaPlayCircle className="text-5xl text-yellow-400" />
+                </button>
               </div>
             </div>
           ))}
@@ -319,9 +315,9 @@ const HomeSearch = () => {
               </div>
 
               <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <a href={playlist.external_urls?.spotify} target="_blank" rel="noopener noreferrer">
-                  <FaPlayCircle className="text-4xl text-yellow-400 hover:scale-110 transition-transform" />
-                </a>
+                <button onClick={() => setSelectedContent(`spotify:playlist:${playlist.id}`)}>
+                  <FaPlayCircle className="text-5xl text-yellow-400" />
+                </button>
               </div>
             </div>
           ))}
@@ -397,9 +393,9 @@ const HomeSearch = () => {
               </div>
 
               <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <a href={episode.external_urls?.spotify} target="_blank" rel="noopener noreferrer">
-                  <FaPlayCircle className="text-4xl text-yellow-400 hover:scale-110 transition-transform" />
-                </a>
+                <button onClick={() => setSelectedContent(`spotify:episode:${episode.id}`)}>
+                  <FaPlayCircle className="text-5xl text-yellow-400" />
+                </button>
               </div>
             </div>
           ))}

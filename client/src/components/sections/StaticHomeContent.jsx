@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import LyricsContext from '../Context/LyricsContext';
 import { FaPlayCircle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { useOutletContext } from 'react-router-dom';
 import Loader from '../Loader';
 
 const StaticHomeContent = () => {
@@ -15,6 +16,7 @@ const StaticHomeContent = () => {
   } = useContext(LyricsContext);
 
   const [hoveredId, setHoveredId] = useState(null);
+  const { setSelectedContent } = useOutletContext();
 
   const scrollRefs = {
     audiobooks: useRef(null),
@@ -33,6 +35,10 @@ const StaticHomeContent = () => {
         behavior: 'smooth',
       });
     }
+  };
+
+  const handlePlayClick = (spotifyUri) => {
+    setSelectedContent(spotifyUri); // Set the Spotify URI for the embed player
   };
 
   if (loading) return <Loader />;
@@ -60,6 +66,7 @@ const StaticHomeContent = () => {
               type === 'audiobook' || type === 'show'
                 ? item.publisher
                 : artists;
+            const spotifyUri = item.uri; // Spotify URI for the track, album, or show
 
             return (
               <div
@@ -75,24 +82,20 @@ const StaticHomeContent = () => {
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300"
                   />
                   <div
-                    className={`absolute bottom-4 right-2 transition-opacity duration-200 flex items-center justify-center ${
-                      isHovered ? 'opacity-100' : 'opacity-0'
-                    }`}
+                    className={`absolute bottom-4 right-2 transition-opacity duration-200 flex items-center justify-center ${isHovered ? 'opacity-100' : 'opacity-0'
+                      }`}
                     style={{ zIndex: 10 }}
                   >
-                    <a
-                      href={item.external_urls.spotify}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => handlePlayClick(spotifyUri)}
                       className="flex items-center justify-center p-2"
                     >
                       <FaPlayCircle className="text-4xl sm:text-5xl text-yellow-400" />
-                    </a>
+                    </button>
                   </div>
                   <div
-                    className={`absolute inset-0 bg-black bg-opacity-20 transition-opacity ${
-                      isHovered ? 'opacity-100' : 'opacity-0'
-                    }`}
+                    className={`absolute inset-0 bg-black bg-opacity-20 transition-opacity ${isHovered ? 'opacity-100' : 'opacity-0'
+                      }`}
                   />
                 </div>
                 <p className="text-center text-white mt-2 text-sm sm:text-base hover:text-yellow-500 truncate">
@@ -104,7 +107,6 @@ const StaticHomeContent = () => {
               </div>
             );
           })}
-
           {/* Scroll buttons only on sm and up */}
           <button
             onClick={() => scroll(refKey, 'left')}
