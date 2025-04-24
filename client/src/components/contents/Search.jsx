@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaSearch } from 'react-icons/fa';
 import LyricsContext from '../Context/LyricsContext';
@@ -16,11 +16,14 @@ const Search = ({ isMobile = false, onClose }) => {
     setLoading(true);
 
     try {
-      const { data } = await axios.get("http://localhost:5000/api/spotify-search", {
-        params: { q: query },
-      });      
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/spotify-search`, 
+        {
+          params: { q: query },
+        }
+      );
       setSearchResults(data);
-      navigate('/search/all')
+      navigate('/search/all');
     } catch (error) {
       console.error("Error fetching lyrics:", error);
     }
@@ -38,7 +41,7 @@ const Search = ({ isMobile = false, onClose }) => {
     <div className='relative w-full'>
       <input
         type="text"
-        placeholder= 'Vibes on demand — start your search'
+        placeholder='Vibes on demand — start your search'
         className={`w-full ${isMobile ? 'py-2 pl-10 pr-10 text-sm' : 'py-3 pl-12 pr-4 text-base'} 
           text-white bg-gray-800 backdrop-blur-md rounded-full placeholder-gray-400
           outline-none focus:ring-2 focus:ring-yellow-400 
@@ -55,8 +58,6 @@ const Search = ({ isMobile = false, onClose }) => {
         <FaSearch />
       </span>
 
-
-      {/* Close Button on Mobile */}
       {isMobile && onClose && (
         <button
           onClick={onClose}

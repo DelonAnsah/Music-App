@@ -2,6 +2,8 @@ import React, { createContext, useEffect, useState } from 'react';
 
 export const LyricsContext = createContext();
 
+const API_BASE = import.meta.env.VITE_API_URL;
+
 export const LyricsProvider = ({ children }) => {
   const [tracksList, setTracksList] = useState([]);
   const [searchResults, setSearchResults] = useState({});
@@ -16,161 +18,31 @@ export const LyricsProvider = ({ children }) => {
 
   const clearSearch = () => setSearchResults({});
 
-
-  // Recommended Audiobooks
-  useEffect(() => {
-    const fetchRecommendedAudiobooks = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('http://localhost:5000/api/recommended-audiobooks');
-        if (response.ok) {
-          const data = await response.json();
-          setRecommendedAudiobooks(data.shows);
-        } else {
-          console.error('Error fetching recommended audiobooks:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching recommended audiobooks:', error);
-      } finally {
-        setLoading(false);
+  const fetchData = async (endpoint, setter, key) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_BASE}/api/${endpoint}`);
+      if (response.ok) {
+        const data = await response.json();
+        setter(data[key]);
+      } else {
+        console.error(`Error fetching ${endpoint}:`, response.status);
       }
-    };
-    fetchRecommendedAudiobooks();
-  }, []);
+    } catch (error) {
+      console.error(`Error fetching ${endpoint}:`, error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-
-  // Trending Albums
   useEffect(() => {
-    const fetchTrendingAlbums = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('http://localhost:5000/api/trending-albums');
-        if (response.ok) {
-          const data = await response.json();
-          setTrendingAlbums(data.albums);
-        } else {
-          console.error('Error fetching trending albums:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching trending albums:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTrendingAlbums();
-  }, []);
-
-
-  // Trending Songs
-  useEffect(() => {
-    const fetchTrendingTracks = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('http://localhost:5000/api/trending-songs');
-        if (response.ok) {
-          const data = await response.json();
-          setTrendingSongs(data.tracks);
-        } else {
-          console.error('Error fetching trending songs:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching trending songs:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTrendingTracks();
-  }, []);
-
-
-  //
-
-
-
-  // Top Tracks
-  useEffect(() => {
-    const fetchTopTracks = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('http://localhost:5000/api/top-tracks');
-        if (response.ok) {
-          const data = await response.json();
-          setTopTracks(data.tracks);
-        } else {
-          console.error('Error fetching top tracks:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching top tracks:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTopTracks();
-  }, []);
-
-
-
-  // Top Albums
-  useEffect(() => {
-    const fetchTopAlbums = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('http://localhost:5000/api/top-albums');
-        if (response.ok) {
-          const data = await response.json();
-          setTopAlbums(data.albums);
-        } else {
-          console.error('Error fetching top albums:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching top albums:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTopAlbums();
-  }, []);
-
-  // Shows
-  useEffect(() => {
-    const fetchShows = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('http://localhost:5000/api/shows');
-        if (response.ok) {
-          const data = await response.json();
-          setShows(data.shows);
-        } else {
-          console.error('Error fetching shows:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching shows:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchShows();
-  }, []);
-
-  // Top Artists
-  useEffect(() => {
-    const fetchTopArtists = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('http://localhost:5000/api/top-artists');
-        if (response.ok) {
-          const data = await response.json();
-          setTopArtists(data.artists);
-        } else {
-          console.error('Error fetching top artists:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching top artists:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTopArtists();
+    fetchData("recommended-audiobooks", setRecommendedAudiobooks, "shows");
+    fetchData("trending-albums", setTrendingAlbums, "albums");
+    fetchData("trending-songs", setTrendingSongs, "tracks");
+    fetchData("top-tracks", setTopTracks, "tracks");
+    fetchData("top-albums", setTopAlbums, "albums");
+    fetchData("shows", setShows, "shows");
+    fetchData("top-artists", setTopArtists, "artists");
   }, []);
 
   return (
