@@ -59,6 +59,7 @@ const AlbumsList = () => {
               src={album.images[0]?.url}
               alt={album.name}
               className="w-full h-48 object-cover rounded-md mb-3"
+              loading='lazy'
             />
             <a
               href={album.external_urls.spotify}

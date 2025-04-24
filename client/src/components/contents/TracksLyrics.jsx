@@ -60,6 +60,7 @@ const TracksLyrics = () => {
                     src={track.result.song_art_image_url}
                     alt={track.result.title}
                     className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+                    loading='lazy'
                   />
                   <div className="absolute top-0 right-0 bg-gradient-to-r from-gray-900/80 to-transparent p-2 text-sm text-white rounded-tl-lg">
                     {track.result.release_date_for_display || 'Unknown'}

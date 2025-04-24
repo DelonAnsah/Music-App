@@ -48,6 +48,7 @@ const PodcastsList = () => {
                 src={show.images[0].url}
                 alt={show.name}
                 className="w-full h-48 object-cover rounded-md mb-3"
+                loading='lazy'
               />
             )}
             <a href={show.external_urls.spotify} target="_blank" rel="noopener noreferrer">

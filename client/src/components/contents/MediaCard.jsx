@@ -13,7 +13,7 @@ const MediaCard = ({ item, type }) => {
           (type === 'song' && item.album?.images?.[0]?.url) ||
           item.images?.[0]?.url ||
           ''
-        } alt={item.name} className='w-full h-full object-cover' />
+        } alt={item.name} className='w-full h-full object-cover' loading='lazy' />
         <div className='absolute inset-0 bg-black bg-opacity-20 transition-opacity' />
       </div>
       <div className='flex flex-1 flex-col'>

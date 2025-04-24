@@ -14,7 +14,7 @@ const LyricsSearch = ({ isMobile = false, onClose }) => {
     if (!search.trim()) return;
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5000/api/search?q=${search}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/search?q=${search}`);
       setTracksList(response.data.response.hits);
       setSearch('');
     } catch (error) {

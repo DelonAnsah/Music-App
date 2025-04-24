@@ -21,6 +21,7 @@ const TopArtists = () => {
                 src={artist.images[0].url}
                 alt={artist.name}
                 className="rounded-full w-full h-full object-cover border-4 border-gray-700 group-hover:border-yellow-400 transition"
+                loading='lazy'
               />
             </div>
             <div className="text-center">

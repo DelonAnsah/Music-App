@@ -80,6 +80,7 @@ const StaticHomeContent = () => {
                     src={imageUrl}
                     alt={name}
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300"
+                    loading='lazy'
                   />
                   <div
                     className={`absolute bottom-4 right-2 transition-opacity duration-200 flex items-center justify-center ${isHovered ? 'opacity-100' : 'opacity-0'

@@ -50,6 +50,7 @@ const SongsList = () => {
               src={song.album.images[0]?.url}
               alt={song.name}
               className="w-16 h-16 rounded-md"
+              loading='lazy'
             />
             <div className="ml-4 flex-1">
               <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">

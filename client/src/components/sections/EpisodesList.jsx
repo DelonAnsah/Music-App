@@ -59,6 +59,7 @@ const EpisodesList = () => {
                 src={episode.images[0].url}
                 alt={episode.name}
                 className="w-full h-48 object-cover rounded-md mb-3"
+                loading='lazy'
               />
             )}
             <a href={episode.external_urls.spotify} target="_blank" rel="noopener noreferrer">

@@ -59,6 +59,7 @@ const ArtistsList = () => {
                 src={artist.images[0].url}
                 alt={artist.name}
                 className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
+                loading='lazy'
               />
             )}
             <a

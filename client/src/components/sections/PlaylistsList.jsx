@@ -60,6 +60,7 @@ const PlaylistsList = () => {
                 src={playlist.images[0].url}
                 alt={playlist.name}
                 className="w-full h-48 object-cover rounded-md mb-3"
+                loading='lazy'
               />
             )}
             <a href={playlist.external_urls.spotify} target="_blank" rel="noopener noreferrer">

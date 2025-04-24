@@ -67,6 +67,7 @@ const HomeSearch = () => {
                       src={artist.images[0].url}
                       alt={artist.name}
                       className="w-full h-full object-cover rounded-full"
+                      loading='lazy'
                     />
                   )}
                 </div>
@@ -112,6 +113,7 @@ const HomeSearch = () => {
                         src={song.album.images[0]?.url}
                         alt={song.name}
                         className="w-16 h-16 rounded-md"
+                        loading='lazy'
                       />
                       <div className="ml-4 flex-1">
                         <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">
@@ -148,6 +150,7 @@ const HomeSearch = () => {
                         src={song.album.images[0]?.url}
                         alt={song.name}
                         className='w-16 h-16 object-cover rounded-md'
+                        loading='lazy'
                       />
                       <div className='flex justify-between items-center w-full ml-4'>
                         <div className='flex flex-col truncate max-w-[70%]'>
@@ -202,6 +205,7 @@ const HomeSearch = () => {
                   src={artist.images[0].url}
                   alt={artist.name}
                   className="w-32 h-32 object-cover rounded-full mb-4"
+                  loading='lazy'
                 />
               )}
 
@@ -246,6 +250,7 @@ const HomeSearch = () => {
                   src={album.images[0]?.url}
                   alt={album.name}
                   className="w-full h-full object-cover rounded-md"
+                  loading='lazy'
                 />
               </div>
 
@@ -301,6 +306,7 @@ const HomeSearch = () => {
                     src={playlist.images[0].url}
                     alt={playlist.name}
                     className="w-full h-full object-cover rounded-md"
+                    loading='lazy'
                   />
                 )}
               </div>
@@ -343,6 +349,7 @@ const HomeSearch = () => {
                     src={podcast.images[0].url}
                     alt={podcast.name}
                     className="w-full h-full object-cover rounded-md"
+                    loading='lazy'
                   />
                 )}
               </div>
@@ -377,6 +384,7 @@ const HomeSearch = () => {
                     src={episode.images[0].url}
                     alt={episode.name}
                     className="w-full h-full object-cover rounded-md"
+                    loading='lazy'
                   />
                 )}
               </div>
