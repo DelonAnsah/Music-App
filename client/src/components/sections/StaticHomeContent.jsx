@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import LyricsContext from '../Context/LyricsContext';
 import { FaPlayCircle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { useOutletContext } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import Loader from '../Loader';
 
 const StaticHomeContent = () => {
@@ -17,6 +17,7 @@ const StaticHomeContent = () => {
 
   const [hoveredId, setHoveredId] = useState(null);
   const { setSelectedContent } = useOutletContext();
+  const isUserLoggedIn = false;
 
   const scrollRefs = {
     audiobooks: useRef(null),
@@ -26,6 +27,8 @@ const StaticHomeContent = () => {
     topSongs: useRef(null),
     topAlbums: useRef(null),
   };
+
+
 
   const scroll = (refKey, direction) => {
     const ref = scrollRefs[refKey];
@@ -43,11 +46,19 @@ const StaticHomeContent = () => {
 
   if (loading) return <Loader />;
 
-  const renderCarousel = (title, data, type, refKey) => (
+  const renderCarousel = (title, data, type, refKey, viewAllLink) => (
     <div className="pt-3">
-      <h3 className="text-white uppercase font-bold text-base sm:text-lg leading-6 mb-3 sm:mb-4">
-        {title}
-      </h3>
+      <div className='flex justify-between items-center'>
+        <h3 className="text-white uppercase font-bold text-base sm:text-lg leading-6 mb-3 sm:mb-4">
+          {title}
+        </h3>
+        <Link to={viewAllLink}>
+        <h3 className='text-yellow-400 uppercase font-bold text-sm sm:text-base leading-6 mb-3 sm:mb-4'>
+          VIEW ALL
+        </h3>
+      </Link>
+      </div>
+
       <div className="relative flex flex-col group">
         <div
           ref={scrollRefs[refKey]}
@@ -128,12 +139,12 @@ const StaticHomeContent = () => {
 
   return (
     <div className="">
-      {renderCarousel('RECOMMENDED FOR YOU', recommendedAudiobooks, 'audiobook', 'audiobooks')}
-      {renderCarousel('TRENDING SONGS', trendingSongs, 'song', 'songs')}
-      {renderCarousel('TRENDING ALBUMS', trendingAlbums, 'album', 'albums')}
-      {renderCarousel('SPOTLIGHT ON SHOWS', shows, 'show', 'shows')}
-      {renderCarousel('TOP SONGS IN GHANA', topTracks, 'topSong', 'topSongs')}
-      {renderCarousel('TOP ALBUMS IN GHANA', topAlbums, 'topAlbum', 'topAlbums')}
+      { isUserLoggedIn && renderCarousel('RECOMMENDED FOR YOU', recommendedAudiobooks, 'audiobook', 'audiobooks')}
+      {renderCarousel('TRENDING SONGS', trendingSongs, 'song', 'songs', '/trending-songs')}
+      {renderCarousel('TRENDING ALBUMS', trendingAlbums, 'album', 'albums', '/trending-albums')}
+      {renderCarousel('SPOTLIGHT ON SHOWS', shows, 'show', 'shows', '/trending-shows')}
+      {renderCarousel('TOP SONGS IN GHANA', topTracks, 'topSong', 'topSongs', '/top-songs')}
+      {renderCarousel('TOP ALBUMS IN GHANA', topAlbums, 'topAlbum', 'topAlbums','/top-albums')}
     </div>
   );
 };

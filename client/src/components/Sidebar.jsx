@@ -25,7 +25,7 @@ const Sidebar = () => {
                 to={to}
                 end={to === '/'}
                 className={({ isActive }) =>
-                  `flex items-center gap-2 px-3 py-1 rounded-full text-xs transition-all duration-200 border ${
+                  `flex items-center gap-2 px-3 py-2 rounded-full text-xs transition-all duration-200 border ${
                     isActive
                       ? 'bg-yellow-400 text-gray-900 font-bold shadow'
                       : 'bg-gray-800 text-white hover:bg-gray-700'
