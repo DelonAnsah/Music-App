@@ -115,8 +115,27 @@ app.get('/api/spotify-search', ensureSpotifyToken, async (req, res) => {
 // Spotify API: Trending Songs
 app.get('/api/trending-songs', ensureSpotifyToken, async (req, res) => {
   const trackIds = [
+  '0d2ESATuSAJETg8xLPbUhq',
+  '0v7L4PS0CV3DXo2ZsD2eG9',
+  '2onGyz3G49PZrhHH6QTMz6',
+  '34TdvmT0k6606XHNBUwF9H',
+  '1k51Q6GFWBbsaWlBB2gnzo',
+  '4DREBgUie15tAPq9KQqe2c',
+  '7BdaHUJnbX10Lk4Q3MckT8',
+  '0EP9NHuH816JCYR8kKsbqb',
+  '69jF1dMiO4jBglaPkBGW8h',
+  '40HkrsGJCVYrMZMAMzv15x',
+  '7vVe1wzmw3YSFB9ZqvFrH6',
+  '0pHeUkxz9WffSOZnoKW1qc',
+  '3e717rcDVqy43k8T8adezP',
+  '6AbNA5ri6j7EhTXZggN6ZK9',
+  '5Crei6PNVhOpTaJC5AlgzU',
+  '4GlUBqfPOLCPirtduhOkwz',
+  '3gowCKVy7fRvkEMtDvjyBS',
    '6HGL76EoYOTR2ETqucHxPA',
    '52FemYiqssXnPyTr3ZAy3J',
+   '4CATja3o9Jo9kx7nRE3eJJ',
+   '7tHSXFRCyUbETKscfpcyht',
    '18ohSiDMM8ZNiEDYTKvIYs',
    '0MiqXnVdcKZDBj64nlOD7c',
    '6rJXB7fIyujJK7MEfcCvrs',
@@ -133,9 +152,10 @@ app.get('/api/trending-songs', ensureSpotifyToken, async (req, res) => {
    '0s74UIzGz7XugfaIwbT2hZ',
    '3a3J1pepWFz0obGC11CsIK',
    '0zCBuNnMKpn8G2YpTQf31e', 
-  '1fwGhhBiHa7IJmpRTbcxY4', 
    '4EeTOYCyjKi8wflQdhI9cm', '3qS4spuVywoeh9uGIpRuQh',
-    '3IG7buiZRrNCDKvYTyPsRz', '4njcIk0TFuGX5pRCSUFat6', '7H4XXFebjpDyyx4s7t0Ml3',
+    '3IG7buiZRrNCDKvYTyPsRz', 
+    '0cCbKFCJ0ozVziMZihtKAr',
+    '4njcIk0TFuGX5pRCSUFat6', '7H4XXFebjpDyyx4s7t0Ml3',
     '5eEujB7GCM34vovJBGCU50', '6BZ2DNapAPgzNDMz3tozhU', '0W1Ke5RQASo6sXuK4D3APz',
     '3gsCjnr9yUXh4jwgRuJnSF', '27wZV9FKlwMaJ28ISQl2TE', '4GxLgEMcpjaMaPXh7MRlMV',
     '3SrJIhtj1ftZx7D3bMrcEu', '6cRQPMi6eZTtP7VvKmc4Rw', '23V5fdkKapbNXIgQb3uh27',
@@ -143,7 +163,8 @@ app.get('/api/trending-songs', ensureSpotifyToken, async (req, res) => {
     '0XLxTtOPPrHsnqtgZordgF', '31d1jnHHtwc43kLjZDNuRs', '5idNXEnzF0EInWSgXjz4nx',
     '16uuguJjHf7d7gyxpnGwOn', '2Jd4Q221yEUErBKmzGlIGy', '14yrtXhhEGjAHqsdwW7WOa',
     '64YJeGo9tXmfvRTPcv9rcP', '2fhVsI54lSCFyW7sw5WPfR', '0PbPyVuLS2Cc5IM7uMm1Qg',
-    '74dreCfizlrtEoWS0DSb6w', '7BDTf2SfYoi0cNao2kgTMC'
+    '74dreCfizlrtEoWS0DSb6w', '7BDTf2SfYoi0cNao2kgTMC',
+    '1fwGhhBiHa7IJmpRTbcxY4'
   ];
 
   try {
@@ -162,14 +183,36 @@ app.get('/api/trending-songs', ensureSpotifyToken, async (req, res) => {
 // Spotify API: Top Tracks
 app.get('/api/top-tracks', ensureSpotifyToken, async (req, res) => {
   const trackIds = [
-    '6QLkRE9Px8RvInJGvms5X6', '2dZ0GjY40Y2OYzRaiD8yYq', '3C5s6DTIhYRmCzgm8yfJlm',
-    '3Xa0qIUcRBZgOCs4XBqJdC', '1mUPiWUDXCQvkiNpzNa0yk', '7mdvPu1ZAOIgMzr3sfpAqk',       
-    '7krvWOVJSMcj3LHuxygzLh', '18ohSiDMM8ZNiEDYTKvIYs', '5EYCa73AMEDRwkWUcAmiB6',   
-    '642UlSGtBqRt7RPW6p930B', '23V5fdkKapbNXIgQb3uh27', '4CAlvOHCeF9HnzhehAdGBu',                           
-    '4c7hkB8y91eb35KlPFtpCS', '5eEujB7GCM34vovJBGCU50', '1tBfoI9tFVl8ampIRG4eTr', 
-    '3a3J1pepWFz0obGC11CsIK', '12jJRu9yInIX7oTxoXtM0S', '1y9DKiy8X0zejal5Avpleb', 
+    '3bdntVS2dHPTPitwms9gLK',
+    '6QLkRE9Px8RvInJGvms5X6', '2dZ0GjY40Y2OYzRaiD8yYq', 
+    '5GyaXqMfcIGHfmTUITFacS',
+    '3Xa0qIUcRBZgOCs4XBqJdC', 
+    '7mdvPu1ZAOIgMzr3sfpAqk',   
+    '1mUPiWUDXCQvkiNpzNa0yk', 
+    '7krvWOVJSMcj3LHuxygzLh', 
+    '5EYCa73AMEDRwkWUcAmiB6',  
+    '642UlSGtBqRt7RPW6p930B', 
+    '4c7hkB8y91eb35KlPFtpCS', 
+    '4CAlvOHCeF9HnzhehAdGBu',  
+    '1tBfoI9tFVl8ampIRG4eTr',  
+    '23V5fdkKapbNXIgQb3uh27', 
+    '12jJRu9yInIX7oTxoXtM0S', 
+    '1y9DKiy8X0zejal5Avpleb', 
+    '4DREBgUie15tAPq9KQqe2c',
+    '18ohSiDMM8ZNiEDYTKvIYs', 
     '0HtHmm24jro58XSIW2UIoC',
-    '6o5xPdBdyR6KSAhOxsLFeO', '7msfmSm4KbVnIds5DvsGzT', '0yNNfq9NEcZgapuJm3PT89',
+    '4JCtoBdFVPDURYV5nIUttM',
+    '0yNNfq9NEcZgapuJm3PT89',
+    '7msfmSm4KbVnIds5DvsGzT', 
+    '4urzJM1eMsfhZw1wpQEcNR',
+    '5eEujB7GCM34vovJBGCU50', 
+    '2kMYpI02BoSrdQhNgmXeWl',
+    '6o5xPdBdyR6KSAhOxsLFeO', 
+    '6fVjIo9wkW9Z1u0qWLa1Ql',
+    '0GzT6ee1Maf91W2f737jex',
+    '0GzT6ee1Maf91W2f737jex',
+    '3C5s6DTIhYRmCzgm8yfJlm',
+    '3a3J1pepWFz0obGC11CsIK', 
     '3FkXCJHhixb0wzGIELYGzG'
   ];
 
@@ -214,12 +257,27 @@ app.get('/api/trending-albums', ensureSpotifyToken, async (req, res) => {
 // Spotify API: Top Albums
 app.get('/api/top-albums', ensureSpotifyToken, async (req, res) => {
   const albumIds = [
-    '3gi5efMf1SiQfnqpy1o0CK', '75ypH24gbGXUjhJWYDw4XG', '5x9SfaZWfdQajuDmgQxXQ8',
-    '0EvEjwk2ybLeIPUh4wScRC', '4hY1NBroE5DijT1XbAX85n', '14bu8IbUpsWxBnQwKx4hvb',
-    '6C2f1XaNPB75cqr1eR7lbb', '3klhReVghIi1koerqidL7b', '5i3t44ZOyolbQ3f9SVH93x',
-    '2hFPnpDZYgCv95Ye4Zc93v', '4eUmsqNGSbpaCJWnpQzCte', '0509XspJuKs2kUv31D9ED4',
-    '5n8qjShh7JbArXrVMfJ4Cp', '6PAGfuja5bu2d7EHzo77uz', '4NGEratFagI2l32OpM8bAi',
-    '5EomOd5HdWMyenGsSv61D2', '3kS42vslfpYnxWkGN4JvlW', '7DBv2Kav5WcnKlrBvEo2Xm',
+    '3gi5efMf1SiQfnqpy1o0CK', '75ypH24gbGXUjhJWYDw4XG', 
+    '4jzhMxpTkAm2pxUuamulT8',
+    '5x9SfaZWfdQajuDmgQxXQ8',
+    '0EvEjwk2ybLeIPUh4wScRC', 
+    '14bu8IbUpsWxBnQwKx4hvb','4hY1NBroE5DijT1XbAX85n', 
+    '5i3t44ZOyolbQ3f9SVH93x',
+    '3klhReVghIi1koerqidL7b', 
+    '6C2f1XaNPB75cqr1eR7lbb', 
+    '2hFPnpDZYgCv95Ye4Zc93v', 
+    '6A9vRCTrmUNqdsW93J3vPK',
+    '4eUmsqNGSbpaCJWnpQzCte', 
+    '6PAGfuja5bu2d7EHzo77uz', 
+    '0509XspJuKs2kUv31D9ED4',
+    '4NGEratFagI2l32OpM8bAi',
+    '5n8qjShh7JbArXrVMfJ4Cp', 
+    '5EomOd5HdWMyenGsSv61D2', '3kS42vslfpYnxWkGN4JvlW', 
+    '21y5KxfsNHRVikyNTWLaHy',
+    '3QjBdftIw2vfGnSZSqRVcF',
+    '6oattTuSkHpcHFeOqyhjKF',
+    '1MmHJNaYAsG94CdZnJizpu',
+    '7DBv2Kav5WcnKlrBvEo2Xm',
     '3QjBdftIw2vfGnSZSqRVcF'
   ];
 
