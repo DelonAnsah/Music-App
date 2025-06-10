@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
 import Loader from '../Loader';
 
-
 const formatDuration = (ms) => {
   const totalSeconds = Math.floor(ms / 1000);
   const minutes = Math.floor(totalSeconds / 60);
@@ -24,16 +23,87 @@ const formatMinutes = (ms) => {
   return `${totalMinutes} min`;
 };
 
+// Skeleton Loader Components
+const TopResultSkeleton = () => (
+  <div className="flex flex-col w-full p-3 sm:p-0 lg:w-[400px] h-full justify-between">
+    <div className='hidden lg:flex'>
+      <div className="h-8 w-32 bg-gray-700 rounded mb-2"></div>
+    </div>
+    <div className='relative sm:bg-gray-800 p-4 rounded-lg flex flex-col flex-1 lg:max-w-md group hover:bg-gray-700'>
+      <div className="w-36 h-36 mb-4 mx-auto bg-gray-700 rounded-full animate-pulse"></div>
+      <div className="flex-1 mb-6 text-center">
+        <div className="h-8 w-3/4 mx-auto bg-gray-700 rounded mb-2 animate-pulse"></div>
+        <div className="h-4 w-1/3 mx-auto bg-gray-700 rounded animate-pulse"></div>
+      </div>
+    </div>
+  </div>
+);
+
+const SongsSkeleton = ({ isMobile }) => (
+  <div className='flex-1'>
+    <div className="h-8 w-24 bg-gray-700 rounded mb-4"></div>
+    {isMobile ? (
+      <div className="flex flex-col gap-4">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="flex items-center bg-gray-800 p-3 rounded-lg">
+            <div className="w-16 h-16 rounded-md bg-gray-700 animate-pulse"></div>
+            <div className="ml-4 flex-1">
+              <div className="h-5 w-3/4 bg-gray-700 rounded mb-2 animate-pulse"></div>
+              <div className="h-4 w-1/2 bg-gray-700 rounded animate-pulse"></div>
+            </div>
+            <div className="w-6 h-6 bg-gray-700 rounded-full animate-pulse"></div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div className="flex flex-col gap-3">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className='flex items-center bg-gray-800 p-3 rounded-lg'>
+            <div className='w-16 h-16 rounded-md bg-gray-700 animate-pulse'></div>
+            <div className='flex justify-between items-center w-full ml-4'>
+              <div className='flex flex-col truncate max-w-[70%]'>
+                <div className='h-5 w-3/4 bg-gray-700 rounded mb-2 animate-pulse'></div>
+                <div className='h-4 w-1/2 bg-gray-700 rounded animate-pulse'></div>
+              </div>
+              <div className='flex items-center gap-4'>
+                <div className="h-4 w-12 bg-gray-700 rounded animate-pulse"></div>
+                <div className="w-6 h-6 bg-gray-700 rounded-full animate-pulse"></div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+);
+
+const GridSkeleton = ({ count, isSquare }) => (
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+    {[...Array(count)].map((_, i) => (
+      <div key={i} className="relative p-4 bg-gray-800 rounded-lg group hover:bg-gray-700 transition duration-300 flex flex-col items-center text-center">
+        <div className={`${isSquare ? 'w-full aspect-square' : 'w-32 h-32'} bg-gray-700 rounded-full mb-4 animate-pulse`}></div>
+        <div className="h-5 w-3/4 bg-gray-700 rounded mb-1 animate-pulse"></div>
+        <div className="h-4 w-1/2 bg-gray-700 rounded animate-pulse"></div>
+      </div>
+    ))}
+  </div>
+);
+
+const HorizontalScrollSkeleton = ({ count }) => (
+  <div className="flex gap-6 overflow-x-auto sm:overflow-visible whitespace-nowrap scrollbar-hide scroll-smooth no-scrollbar">
+    {[...Array(count)].map((_, i) => (
+      <div key={i} className="min-w-[250px] sm:min-w-0 relative p-4 rounded-lg group hover:bg-gray-700 transition duration-300">
+        <div className="w-full aspect-square bg-gray-700 rounded-md mb-4 animate-pulse"></div>
+        <div className="h-5 w-3/4 bg-gray-700 rounded mb-2 animate-pulse"></div>
+        <div className="h-4 w-1/2 bg-gray-700 rounded animate-pulse"></div>
+      </div>
+    ))}
+  </div>
+);
 
 const HomeSearch = () => {
-
   const { searchResults, loading } = useContext(LyricsContext);
-
   const { setSelectedContent } = useOutletContext();
-
-
-  if (loading) return <Loader />;
-
 
   const artist = searchResults.artists?.items?.[0];
   const songs = searchResults.tracks?.items || [];
@@ -43,12 +113,46 @@ const HomeSearch = () => {
   const shows = searchResults.shows?.items || [];
   const episodes = searchResults.episodes?.items || [];
 
+  if (loading) return (
+    <section className="container mx-auto max-w-screen-xl text-white">
+      <div className="sm:px-6">
+        <div className='flex flex-col lg:flex-row gap-6 sm:mt-6 flex-wrap'>
+          <TopResultSkeleton />
+          <SongsSkeleton isMobile={false} />
+        </div>
+      </div>
 
+      {/* Artists */}
+      <div className="mt-10 w-full px-6">
+        <div className="h-8 w-24 bg-gray-700 rounded mb-4"></div>
+        <GridSkeleton count={5} isSquare={false} />
+      </div>
 
-  if (artist) {
-    const { images, description, name } = artist;
-  }
+      {/* Albums */}
+      <div className="mt-10 w-full px-6">
+        <div className="h-8 w-24 bg-gray-700 rounded mb-4"></div>
+        <HorizontalScrollSkeleton count={4} />
+      </div>
 
+      {/* Playlist */}
+      <div className="mt-10 w-full px-6">
+        <div className="h-8 w-24 bg-gray-700 rounded mb-4"></div>
+        <HorizontalScrollSkeleton count={4} />
+      </div>
+
+      {/* Podcasts */}
+      <div className="mt-10 w-full px-6">
+        <div className="h-8 w-24 bg-gray-700 rounded mb-4"></div>
+        <HorizontalScrollSkeleton count={4} />
+      </div>
+
+      {/* Episodes */}
+      <div className="my-10 w-full px-6">
+        <div className="h-8 w-24 bg-gray-700 rounded mb-4"></div>
+        <HorizontalScrollSkeleton count={4} />
+      </div>
+    </section>
+  );
 
   return (
     <section className="container mx-auto max-w-screen-xl text-white">
@@ -411,7 +515,6 @@ const HomeSearch = () => {
       </div>
 
     </section>
-
   )
 }
 

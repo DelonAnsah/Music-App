@@ -19,6 +19,7 @@ import PodcastsList from './components/sections/PodcastsList'
 import EpisodesList from './components/sections/EpisodesList'
 import TopArtists from './components/sections/TopArtists'
 import AuthPage from './components/pages/AuthPage'
+import ScrollToTop from './components/layout/ScrollToTop'
 
 
 
@@ -26,6 +27,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
+      <ScrollToTop />
       <div className="lg:pt-20">
       <Routes>
         <Route path='/' element={<Home />}>

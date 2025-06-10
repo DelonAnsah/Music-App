@@ -4,6 +4,43 @@ import { FaPlayCircle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { Link, useOutletContext } from 'react-router-dom';
 import Loader from '../Loader';
 
+// Skeleton Loader Component
+const StaticHomeContentSkeleton = () => {
+  const carouselTitles = [
+    'RECOMMENDED FOR YOU',
+    'TRENDING SONGS',
+    'TRENDING ALBUMS',
+    'SPOTLIGHT ON SHOWS',
+    'TOP SONGS IN GHANA',
+    'TOP ALBUMS IN GHANA'
+  ];
+
+  return (
+    <div className="animate-pulse">
+      {carouselTitles.map((title, index) => (
+        <div key={index} className="pt-3">
+          <div className='flex justify-between items-center mb-4'>
+            <div className="h-6 w-40 bg-gray-700 rounded"></div>
+            <div className="h-5 w-20 bg-gray-700 rounded"></div>
+          </div>
+
+          <div className="relative">
+            <div className="flex overflow-x-hidden space-x-4 mb-10">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="flex-shrink-0 w-[160px] sm:w-[200px] md:w-[220px]">
+                  <div className="w-full h-[200px] sm:h-[220px] md:h-[230px] bg-gray-700 rounded-lg"></div>
+                  <div className="h-4 w-3/4 bg-gray-700 rounded mt-2 mx-auto"></div>
+                  <div className="h-4 w-1/2 bg-gray-700 rounded mt-1 mx-auto"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const StaticHomeContent = () => {
   const {
     trendingSongs,
@@ -28,8 +65,6 @@ const StaticHomeContent = () => {
     topAlbums: useRef(null),
   };
 
-
-
   const scroll = (refKey, direction) => {
     const ref = scrollRefs[refKey];
     if (ref?.current) {
@@ -41,10 +76,10 @@ const StaticHomeContent = () => {
   };
 
   const handlePlayClick = (spotifyUri) => {
-    setSelectedContent(spotifyUri); // Set the Spotify URI for the embed player
+    setSelectedContent(spotifyUri);
   };
 
-  if (loading) return <Loader />;
+  if (loading) return <StaticHomeContentSkeleton />;
 
   const renderCarousel = (title, data, type, refKey, viewAllLink) => (
     <div className="pt-3">
@@ -52,11 +87,13 @@ const StaticHomeContent = () => {
         <h3 className="text-white uppercase font-bold text-base sm:text-lg leading-6 mb-3 sm:mb-4">
           {title}
         </h3>
-        <Link to={viewAllLink}>
-        <h3 className='text-yellow-400 uppercase font-bold text-sm sm:text-base leading-6 mb-3 sm:mb-4'>
-          VIEW ALL
-        </h3>
-      </Link>
+        {viewAllLink && (
+          <Link to={viewAllLink}>
+            <h3 className='text-yellow-400 uppercase font-bold text-sm sm:text-base leading-6 mb-3 sm:mb-4'>
+              VIEW ALL
+            </h3>
+          </Link>
+        )}
       </div>
 
       <div className="relative flex flex-col group">
@@ -77,7 +114,7 @@ const StaticHomeContent = () => {
               type === 'audiobook' || type === 'show'
                 ? item.publisher
                 : artists;
-            const spotifyUri = item.uri; // Spotify URI for the track, album, or show
+            const spotifyUri = item.uri;
 
             return (
               <div
@@ -119,7 +156,6 @@ const StaticHomeContent = () => {
               </div>
             );
           })}
-          {/* Scroll buttons only on sm and up */}
           <button
             onClick={() => scroll(refKey, 'left')}
             className="hidden sm:flex absolute left-2 top-[50%] transform -translate-y-1/2 bg-yellow-400 p-2 rounded-full shadow-lg hover:bg-yellow-500 transition opacity-0 group-hover:opacity-100"
@@ -139,12 +175,12 @@ const StaticHomeContent = () => {
 
   return (
     <div className="">
-      { isUserLoggedIn && renderCarousel('RECOMMENDED FOR YOU', recommendedAudiobooks, 'audiobook', 'audiobooks')}
+      {isUserLoggedIn && renderCarousel('RECOMMENDED FOR YOU', recommendedAudiobooks, 'audiobook', 'audiobooks')}
       {renderCarousel('TRENDING SONGS', trendingSongs, 'song', 'songs', '/trending-songs')}
       {renderCarousel('TRENDING ALBUMS', trendingAlbums, 'album', 'albums', '/trending-albums')}
       {renderCarousel('SPOTLIGHT ON SHOWS', shows, 'show', 'shows', '/trending-shows')}
       {renderCarousel('TOP SONGS IN GHANA', topTracks, 'topSong', 'topSongs', '/top-songs')}
-      {renderCarousel('TOP ALBUMS IN GHANA', topAlbums, 'topAlbum', 'topAlbums','/top-albums')}
+      {renderCarousel('TOP ALBUMS IN GHANA', topAlbums, 'topAlbum', 'topAlbums', '/top-albums')}
     </div>
   );
 };
