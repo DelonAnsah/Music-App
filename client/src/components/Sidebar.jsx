@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaHome, FaChartLine, FaGlobe, FaUserAlt } from 'react-icons/fa';
 
@@ -64,7 +64,22 @@ const navLinks = [
 ];
 
 const Sidebar = ({ loading }) => {
-  if (loading) return <SidebarSkeleton />;
+  const [showSkeleton, setShowSkeleton] = useState(true);
+
+  useEffect(() => {
+    
+    if (loading) {
+      setShowSkeleton(true);
+      const timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    } else {
+      setShowSkeleton(false);
+    }
+  }, [loading]);
+
+  if (showSkeleton) return <SidebarSkeleton />;
 
   return (
     <>
